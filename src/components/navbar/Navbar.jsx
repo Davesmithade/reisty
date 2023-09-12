@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {  Box, Button,  List,  ListItem,  MenuItem , Typography, } from '@mui/material'
 // import Logo from "../../assets/reistynewlogo.svg";
 import Logo from "../../assets/reistynewlogo.svg";
@@ -10,16 +10,20 @@ import Popover from '@mui/material/Popover';
 import { BiMenu } from "react-icons/bi";
 import { BiSearch } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
+import {HiOutlineUserCircle} from "react-icons/hi";
 import "../navbar/Navbar.css";
 import Dropdown from "../../assets/dropdownarrow.svg";
 import { countries } from "../../assets/fonts/Data/Countries";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import { LoginContext } from "../../App";
 
 const Sidebar = () => {
   const [flag, setFlag] = useState("ng")
   const [countriesValue, setCountriesValue] = useState("Nigeria")
   const [setNav, isSetNav] = useState(false);
+  const {isLoggedIn,setIsLoggedIn} = useContext(LoginContext)
+
 
   const handleChangeCountry = (event) => {
     setCountriesValue(event.target.value);
@@ -48,9 +52,9 @@ const Sidebar = () => {
       <div className="Navbar flex px-[1.6rem] h-[55px]  lg:border-2 lg:border-b-gray-200 items-center w-full lg:px-[4rem] md:w-full lg:h-fit lg:py-4">
         <div className="flex flex-1" style={{ display:'flex', alignItems:'center', justifyContent:'space-between'}}>
           <div className="flex gap-10 items-center ">
-            <div className="logo flex-1 lg:grid">
+            <div className="logo flex h-11 w-32 justify-center items-center">
               <NavLink to="/">
-                <img src={Logo} alt="" width={80} />
+                <img src={Logo} alt="" width={80} className="h-full w-full"/>
               </NavLink>
             </div>
 
@@ -148,30 +152,49 @@ const Sidebar = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
-            <div className="hidden lg:block">
-              <h1 className="text-[#BC172F] font-normal" style={{fontSize:'15px', fontWeight:500}}>For restaurant</h1>
+
+          <div className="flex items-center gap-8 w-full justify-end h-auto">
+            {
+              isLoggedIn ? (
+                <div className="flex bg-white h-[70px] w-1/2 items-center justify-end p-3 lg-max:hidden">
+            <div className="h-[50px] w-[145px] bg-[#BC172F] flex items-center justify-center rounded-lg m-3 text-white">
+             <p>Micheal Nelson</p>
             </div>
-
-            <div className="btns hidden lg:flex gap-3">
-              <div className="login">
-                <NavLink to="/login">
-                  <button className="py-3 px-6 bg-white ring-1 ring-gray-300 rounded-lg font-normal text-gray-900" style={{fontSize:'14px'}}>
-                    Log In
-                  </button>
-                </NavLink>
-              </div>
-
-              <div className="signup">
-                <NavLink to="/signup">
-                  <button className="py-3 px-6 bg-[#BC172F] rounded-lg text-white font-normal" style={{fontSize:'14px'}}>
-                    Sign Up
-                  </button>
-                </NavLink>
+              <div className="bg-white flex justify-center items-center h-[50px] w-[50px] rounded-full"> 
+              <NavLink to="/userProfile">
+                    <HiOutlineUserCircle size={"4rem"} color="#DADADA"/>
+              </NavLink>
               </div>
             </div>
+              ) : (
+                <><div className="hidden lg:block">
+                    <h1 className="text-[#BC172F] font-normal" style={{ fontSize: '15px', fontWeight: 500 }}>For restaurant</h1>
+                  </div><div className="btns hidden lg:flex gap-3">
+                      <div className="login">
+                        <NavLink to="/login">
+                          <button className="py-3 px-6 bg-white ring-1 ring-gray-300 rounded-lg font-normal text-gray-900" style={{ fontSize: '14px' }}>
+                            Log In
+                          </button>
+                        </NavLink>
+                      </div>
+
+                      <div className="signup">
+                        <NavLink to="/signup">
+                          <button className="py-3 px-6 bg-[#BC172F] rounded-lg text-white font-normal" style={{ fontSize: '14px' }}>
+                            Sign Up
+                          </button>
+                        </NavLink>
+                      </div>
+                    </div></>
+              )
+            }
+
           </div>
+
+
         </div>
+
+
 
         <div className="flex items-center lg:hidden">
           <div>
@@ -193,6 +216,8 @@ const Sidebar = () => {
             )}
           </div>
         </div>
+
+
       </div>
       {!setNav ? (
         ""

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 // import CountrySelector from "../../components/countrydropdown/CountryDropdown";
 
 const Login = () => {
+  
   const handleFacebookLogin = () => {
     // Implement your Facebook login logic here
   };
@@ -22,6 +23,11 @@ const Login = () => {
   const handleAppleLogin = () => {
     // Implement your Apple login logic here
   };
+
+  const initialState = {
+  emailAddress: "",
+  password: "",
+}
 
   return (
     <div>
@@ -94,7 +100,7 @@ const Login = () => {
               <div className="flex items-center justify-between">
                 <button
                   className="bg-red-700 text-white w-[100%] font-normal py-4 px-3 rounded-xl focus:outline-none focus:shadow-outline"
-                  type="button"
+                  type="submit"
                 >
                   Login
                 </button>
