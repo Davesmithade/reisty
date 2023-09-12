@@ -86,7 +86,7 @@ const data = [
                       <AiOutlineShareAlt className="text-[30px]" />
                       </button>
               </div>
-            </div>0
+            </div>
 
           </div> 
 

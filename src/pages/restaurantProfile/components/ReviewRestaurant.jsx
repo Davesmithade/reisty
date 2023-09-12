@@ -132,6 +132,7 @@ const ReviewRestaurant = () => {
                  <h3 className='md:text-[16px] text-[24px]'>Richard Ayo</h3>
                  <p className='text-[#717171] text-sm'>December 2022</p>
                  </div>
+                 
               </div>
               <div className='w-1/2 h-20rounded-lg flex justify-center p-3 items-end flex-col'>
 

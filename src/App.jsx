@@ -9,6 +9,7 @@ import RestaurantsinLocation from "./components/restaurantsinLocation/Restaurant
 import RestaurantProfile from "./pages/restaurantProfile/RestaurantProfile";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import UserProfile from "./pages/userProfile/UserProfile";
 // import Blog from "./pages/aboutUs/Blog";
 // import Career from "./pages/aboutUs/Career";
 // import OurTeam from "./pages/aboutUs/OurTeam";
@@ -20,12 +21,15 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 export const DialogContext = React.createContext(null)
+export const LoginContext = React.createContext(null);
 const App = () => {
 const [showDialog,setShowDialog] = useState(false)
+const [isLoggedIn,setIsLoggedIn] = useState(false)
 
   return (
     <DialogContext.Provider value={{setShowDialog,showDialog}}>
-       <div>
+      <LoginContext.Provider value={{isLoggedIn,setIsLoggedIn}}>
+      <div>
       <BrowserRouter>
       <ToastContainer />
         <Routes>
@@ -35,8 +39,8 @@ const [showDialog,setShowDialog] = useState(false)
             <Route path="/signup" element={<SignUp />} />
             <Route path="/restaurantsinLocation" element={<RestaurantsinLocation />} />
             <Route path="/restaurantProfile" element={<RestaurantProfile />} />
-            {/* <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/support" element={<Support />} />
+            <Route path="/userProfile" element={<UserProfile />} />
+            {/* <Route path="/support" element={<Support />} />
             <Route path="/aboutUs" element={<OurTeam />} />
             <Route path="/careers" element={<Career />} />
             <Route path="/blog" element={<Blog />} />
@@ -45,6 +49,7 @@ const [showDialog,setShowDialog] = useState(false)
         </Routes>
       </BrowserRouter>
     </div>
+      </LoginContext.Provider>
     </DialogContext.Provider>
   );
 };
